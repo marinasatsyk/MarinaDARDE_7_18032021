@@ -1,0 +1,14 @@
+.wrap_specified {
+    margin-top: 50px;
+    display: flex;
+}
+
+.contener_tags {
+    margin-right: 30px;
+}
+
+.list_tag {
+    border: 1px solid black;
+    height: auto;
+    min-height: 50px;
+}
