@@ -21,6 +21,7 @@ let searchBar = document.querySelector("input.main");
 let ingredientBar = document.querySelector("input.ingredients");
 let applianceBar = document.querySelector("input.appareil");
 let ustensilsBar = document.querySelector("input.ustensiles");
+let place_tagAct = document.querySelectorAll(".tag_active");
 
 // 
 
@@ -33,6 +34,7 @@ let MyIngredients = [];
 let MyAppliances = [];
 let MyUstensils = [];
 
+//function for tag ingredients
 function onClickTagIngredient(pTagName) {
     console.log(pTagName);
     // on click tag
@@ -47,6 +49,7 @@ function onClickTagIngredient(pTagName) {
     render();
 }
 
+//function for tag appliance
 function onClickTagAppliance(pTagName) {
     console.log(pTagName);
     // on click tag
@@ -58,8 +61,21 @@ function onClickTagAppliance(pTagName) {
 }
 
 
+//function for tag ustensils
+function onClickTagUstensils(pTagName) {
+    console.log(pTagName);
+    // on click tag
+    MyRecipes = MyRecipes.filter(r => {
 
+        let res = r.ustensils.filter(i => {
+            let ustensilLc = i.toLowerCase();
+            if (ustensilLc.includes(pTagName)) return true;
+        })
+        return res.length > 0;
+    })
 
+    render();
+}
 
 
 function search() {
@@ -180,38 +196,65 @@ function render() {
     // populate Tags
     // TODO
 
+
+
+
+
+
+
     // populate recipes
     let recipesDoc = document.querySelector(".wrap_recipes");
     recipesDoc.innerHTML = "";
+
+
     MyRecipes.map(r => {
         let docIng = "";
+        let docUst = "";
         r.ingredients.map(i => {
             docIng += `<p>${i.ingredient}</p>`;
+            //  TemplateView.createElement("p", "p_ing", docIng).innerHTML = i.ingredient;
+
+        })
+        r.ustensils.map(u => {
+            docUst += `<p>${u}</p>`
         })
         recipesDoc.innerHTML += `<article>
 									<h2>${r.name}</h2>
-									<p>${r.description}</p>
 									<div>${docIng}</div>
+									<p>${r.description}</p>
+									<div>${r.appliance}</div>
+									<div>${docUst}</div>
 								</article>`;
     })
 
 
     //event onclick ingredient tag
-    let all = document.querySelectorAll(".tagI");
-    for (let i = 0; i < all.length; i++) {
-        all[i].onclick = function(event) {
+    let all_I = document.querySelectorAll(".tagI");
+    for (let i = 0; i < all_I.length; i++) {
+        all_I[i].onclick = function(event) {
             onClickTagIngredient(event.target.innerHTML);
-            console.log("click");
         }
 
     }
 
     //event onclick applience tag
+    let all_A = document.querySelectorAll(".tagA");
+    for (let i = 0; i < all_A.length; i++) {
+        all_A[i].onclick = function(event) {
+            onClickTagAppliance(event.target.innerHTML);
+        }
 
+    }
     //event onclick ustensil tag
+    let all_U = document.querySelectorAll(".tagU");
+    for (let i = 0; i < all_U.length; i++) {
+        all_U[i].onclick = function(event) {
+            onClickTagUstensils(event.target.innerHTML);
+        }
 
+    }
 
-
+    console.log(MyRecipes);
 }
 
 
