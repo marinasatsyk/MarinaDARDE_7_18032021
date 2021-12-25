@@ -1,7 +1,4 @@
-.wrap_specified {
-    margin-top: 50px;
-    display: flex;
-}
+/* 
 
 .contener_tags {
     margin-right: 30px;
@@ -12,3 +9,97 @@
     height: auto;
     min-height: 50px;
 }
+
+.tag_active {
+    height: auto;
+    min-height: 50px;
+    border: 1px solid black;
+} */
+
+header {
+    margin-top: 30px;
+}
+
+div.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+input.main {
+    background-color: #E7E7E7;
+    border: none;
+    border-radius: 5px;
+    height: 70px;
+    margin-bottom: 20px;
+    margin-top: 17px;
+}
+
+div.main_search {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+div.wrapper {
+    padding: 0;
+}
+
+.search_tagwrap {
+    display: flex;
+}
+
+.btn_i,
+.btn_a,
+.btn_u {
+    border-radius: 5px;
+    width: auto;
+    min-width: 170px;
+    height: auto;
+    min-height: 70px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 54px;
+    margin-right: 20px;
+}
+
+
+/* button.btn_i,
+div.list_i {
+    background: #3282F7;
+    color: white;
+} */
+
+
+/* div.list_i {
+    display: grid;
+} */
+
+button.btn_a,
+div.list_a {
+    background: #68D9A4;
+    color: white;
+    border-radius: 5px;
+}
+
+button.btn_u,
+div.list_u {
+    background: #ED6454;
+    color: white;
+    border-radius: 5px;
+}
+
+.wrap_specified {}
+
+.wrap_recipes {
+    gap: 10%;
+}
+
+.time {
+    display: flex;
+    font-size: 25px;
+}
+
+
+/* .fa-clock {
+    font-size: 25px;
+     font-weight: bold; 
+} */

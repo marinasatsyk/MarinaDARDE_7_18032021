@@ -22,6 +22,8 @@ let ingredientBar = document.querySelector("input.ingredients");
 let applianceBar = document.querySelector("input.appareil");
 let ustensilsBar = document.querySelector("input.ustensiles");
 let place_tagAct = document.querySelectorAll(".tag_active");
+//
+
 
 // 
 
@@ -33,10 +35,12 @@ let MyRecipes = [];
 let MyIngredients = [];
 let MyAppliances = [];
 let MyUstensils = [];
+let MyTags = [];
 
 //function for tag ingredients
 function onClickTagIngredient(pTagName) {
     console.log(pTagName);
+    MyTags.push(pTagName);
     // on click tag
     MyRecipes = MyRecipes.filter(r => {
         let res = r.ingredients.filter(i => {
@@ -52,6 +56,7 @@ function onClickTagIngredient(pTagName) {
 //function for tag appliance
 function onClickTagAppliance(pTagName) {
     console.log(pTagName);
+    MyTags.push(pTagName);
     // on click tag
     MyRecipes = MyRecipes.filter(r => {
         let applianceLc = r.appliance.toLowerCase();
@@ -64,6 +69,11 @@ function onClickTagAppliance(pTagName) {
 //function for tag ustensils
 function onClickTagUstensils(pTagName) {
     console.log(pTagName);
+
+
+    MyTags.push(pTagName);
+
+
     // on click tag
     MyRecipes = MyRecipes.filter(r => {
 
@@ -106,20 +116,17 @@ function search() {
                     return true;
                 }
             });
-
-
         });
 
         //for show ingredients matched after main search
         result0.map(r => {
-            //?? if other tag is selcted
+            //?? if other tag is selected
             r.ingredients.map(ingredient => {
                 let ingredientLc = ingredient.ingredient.toLowerCase();
                 if (!list_ing.includes(ingredientLc)) {
                     list_ing.push(ingredientLc);
                 }
             })
-
 
             //for show appliance matched after main search
             let applianceLc = r.appliance.toLowerCase();
@@ -159,6 +166,7 @@ function search() {
     MyIngredients = list_ing;
     MyAppliances = list_appl;
     MyUstensils = list_ust;
+
     render();
 
     // let result1 = result0;
@@ -193,9 +201,17 @@ function render() {
     MyAppliances.map(a => TemplateView.createElement("div", "tagA tag", tagA).innerHTML = a);
 
 
+
     // populate Tags
     // TODO
-
+    let tagPlace = document.querySelector(".tag_active");
+    console.log(tagPlace);
+    tagPlace.innerHTML = "";
+    MyTags.map(tag => {
+        let tagAct = TemplateView.createElement("div", "show_tag", tagPlace);
+        // tagAct.style.background =
+        tagAct.innerHTML = tag;
+    });
 
 
 
@@ -206,25 +222,44 @@ function render() {
     let recipesDoc = document.querySelector(".wrap_recipes");
     recipesDoc.innerHTML = "";
 
-
+    console.log(MyRecipes);
     MyRecipes.map(r => {
         let docIng = "";
         let docUst = "";
+        let unit = "";
         r.ingredients.map(i => {
-            docIng += `<p>${i.ingredient}</p>`;
+            if (i.unit) {
+                docIng += `<p>${i.ingredient}: ${i.quantity} ${i.unit}</p>`;
+
+            } else {
+                docIng += `<p>${i.ingredient}: ${i.quantity}</p>`;
+            }
+
+
+            ;
+
+
             //  TemplateView.createElement("p", "p_ing", docIng).innerHTML = i.ingredient;
 
         })
         r.ustensils.map(u => {
             docUst += `<p>${u}</p>`
         })
-        recipesDoc.innerHTML += `<article>
-									<h2>${r.name}</h2>
-									<div>${docIng}</div>
-									<p>${r.description}</p>
-									<div>${r.appliance}</div>
-									<div>${docUst}</div>
-								</article>`;
+        recipesDoc.innerHTML +=
+            `<div class="card col-3">
+		        <img class="card-img-top" src="" alt="">							
+		        <div class="card-body">
+                    
+                    <h2 class="card-title">${r.name}</h2>
+                    <div class="time"> <i class="far fa-clock"></i>
+                    <p class="font-weight-bold">${r.time} min</p></div>
+                   
+			        <div class="card-text">${docIng}</div>
+			        <p class="card-text">${r.description}</p>
+			        <div class="card-text">${r.appliance}</div>
+			        <div class="card-text">${docUst}</div>
+                </div>							
+        	</div>`;
     })
 
 
@@ -254,7 +289,10 @@ function render() {
 
     }
 
+
+
     console.log(MyRecipes);
+    console.log(MyTags);
 }
 
 
