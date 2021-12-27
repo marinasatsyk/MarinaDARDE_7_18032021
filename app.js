@@ -147,9 +147,9 @@ function search() {
             })
 
         });
-        console.log(list_ing.toString());
-        console.log(list_appl.toString());
-        console.log(list_ust.toString());
+        // console.log(list_ing.toString());
+        // console.log(list_appl.toString());
+        // console.log(list_ust.toString());
     }
 
 
@@ -328,9 +328,21 @@ function render() {
 }
 
 
+// function toggle visibility
+let dropdown_arr = document.querySelector("i.fa-chevron-down");
+let list_ingredients = document.querySelector(".list_i");
+let dropdown_btn = document.querySelector(".btn_i");
 
+function visible() {
+    list_ingredients.classList.toggle("d_grid");
+    list_ingredients.classList.toggle("d_none");
+    dropdown_arr.classList.toggle("animation_arrow");
+    dropdown_btn.classList.toggle("show_btn");
+}
 
+dropdown_arr.onclick = visible;
 
+console.dir(dropdown_btn);
 
 
 

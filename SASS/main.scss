@@ -53,6 +53,10 @@ div.wrapper {
     display: flex;
 }
 
+.contener_tags {
+    margin-right: 20px;
+}
+
 .btn_i,
 .btn_a,
 .btn_u {
@@ -63,22 +67,101 @@ div.wrapper {
     min-height: 70px;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 54px;
-    margin-right: 20px;
+    // margin-bottom: 54px;
+    // margin-right: 20px;
 }
 
-button.btn_a,
+.btn_i {
+    background: #3282F7;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+        margin: 0;
+    }
+}
+
+//
+.show_btn {
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+// in dispmay non 
+div.list_i {
+    background: #3282F7;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.d_grid {
+    display: grid;
+    grid-template-rows: repeat(10, auto);
+    grid-gap: 20px;
+    grid-auto-flow: column;
+}
+
+.d_none {
+    display: none;
+}
+
+input.ingredients {
+    background: #3282F7;
+    color: white;
+    border: hidden;
+    outline: none;
+    &::placeholder {
+        color: #E7E7E7;
+        font-size: 18px;
+        font-family: 'Lato';
+        font-weight: bold;
+    }
+    &:hover {
+        background: #3282F7;
+        color: white;
+    }
+}
+
+//animation===============================
+.wrapper_anim {
+    animation: height 1s forwards;
+}
+
+.wrapper_close {
+    animation: height 1s reverse forwards;
+}
+
+.animation_arrow {
+    animation: arrow 1s forwards;
+}
+
+@keyframes height {
+    100% {
+        height: 150px;
+    }
+}
+
+@keyframes arrow {
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+//=========================================
+.btn_a,
 div.list_a {
     background: #68D9A4;
     color: white;
-    border-radius: 5px;
+    //@debug: 5px;
 }
 
-button.btn_u,
+.btn_u,
 div.list_u {
     background: #ED6454;
     color: white;
-    border-radius: 5px;
+    //border-radius: 5px;
 }
 
 .tag_active {
@@ -127,7 +210,8 @@ div.list_u {
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 0;
-            text-align: center;
+            text-align: left;
+            max-width: 75%;
         }
     }
     .time {
@@ -151,16 +235,18 @@ div.list_u {
         display: grid;
         grid-template-columns: 1fr 1fr;
         font-size: 12px;
-        height: 105px;
+        height: 85px;
         overflow: hidden;
-        text-overflow: ellipsis;
+        // text-overflow: ellipsis;
+        .card_text {
+            text-overflow: ellipsis;
+        }
         .list_p {
             margin-bottom: 0;
             text-overflow: ellipsis;
         }
         .card_descr {
-            height: 100%;
-            text-overflow: ellipsis;
+            // text-overflow: ellipsis;
             margin-bottom: 0;
         }
     }
