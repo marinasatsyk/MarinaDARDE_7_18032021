@@ -39,8 +39,9 @@ let MyTags = [];
 
 //function for tag ingredients
 function onClickTagIngredient(pTagName) {
-    console.log(pTagName);
-    MyTags.push(pTagName);
+    console.dir(pTagName);
+    let objIng = { "ingredient": pTagName }
+    MyTags.push(objIng);
     // on click tag
     MyRecipes = MyRecipes.filter(r => {
         let res = r.ingredients.filter(i => {
@@ -55,8 +56,9 @@ function onClickTagIngredient(pTagName) {
 
 //function for tag appliance
 function onClickTagAppliance(pTagName) {
-    console.log(pTagName);
-    MyTags.push(pTagName);
+
+    let objAppl = { "appliance": pTagName }
+    MyTags.push(objAppl);
     // on click tag
     MyRecipes = MyRecipes.filter(r => {
         let applianceLc = r.appliance.toLowerCase();
@@ -71,7 +73,8 @@ function onClickTagUstensils(pTagName) {
     console.log(pTagName);
 
 
-    MyTags.push(pTagName);
+    let objUst = { "ustensil": pTagName }
+    MyTags.push(objUst);
 
 
     // on click tag
@@ -208,9 +211,24 @@ function render() {
     console.log(tagPlace);
     tagPlace.innerHTML = "";
     MyTags.map(tag => {
-        let tagAct = TemplateView.createElement("div", "show_tag", tagPlace);
+        console.log(tag.ingredient);
+        let tagAct;
+        if (tag.ingredient) {
+            tagAct = TemplateView.createElement("div", "show_tag tag_ing", tagPlace);
+            tagAct.innerHTML = `<p>${tag.ingredient}</p> <i class="far fa-times-circle"></i>`;
+            tagAct.style = "background: #3282F7; color: white;"
+        } else if (tag.appliance) {
+            tagAct = TemplateView.createElement("div", "show_tag tag_apl", tagPlace);
+            tagAct.innerHTML = `<p>${tag.appliance}</p> <i class="far fa-times-circle"></i>`;
+            tagAct.style = "background: #68D9A4; color: white;"
+        } else if (tag.ustensil) {
+            tagAct = TemplateView.createElement("div", "show_tag tag_ust", tagPlace);
+            tagAct.innerHTML = `<p>${tag.ustensil}</p> <i class="far fa-times-circle"></i>`;
+            tagAct.style = "background: #ED6454; color: white;"
+        }
+
         // tagAct.style.background =
-        tagAct.innerHTML = tag;
+
     });
 
 
@@ -226,57 +244,71 @@ function render() {
     MyRecipes.map(r => {
         let docIng = "";
         let docUst = "";
-        let unit = "";
+
         r.ingredients.map(i => {
-            if (i.unit) {
-                docIng += `<p>${i.ingredient}: ${i.quantity} ${i.unit}</p>`;
+            if (i.ingredient && i.quantity && i.unit) {
+                docIng += `<p class="list_p">${i.ingredient}: ${i.quantity} ${i.unit}</p>`;
 
-            } else {
-                docIng += `<p>${i.ingredient}: ${i.quantity}</p>`;
+            } else if (i.ingredient && i.quantity && !i.unit) {
+                docIng += `<p class="list_p">${i.ingredient}: ${i.quantity}</p>`;
+
+            } else if (i.ingredient && !i.quantity && !i.unit) {
+                docIng += `<p class="list_p">${i.ingredient}</p>`;
             }
-
-
-            ;
-
 
             //  TemplateView.createElement("p", "p_ing", docIng).innerHTML = i.ingredient;
 
         })
         r.ustensils.map(u => {
-            docUst += `<p>${u}</p>`
+            docUst += `<p class="list_u">${u}</p>`
         })
+        console.log(docIng);
+
         recipesDoc.innerHTML +=
-            `<div class="card col-3">
-		        <img class="card-img-top" src="" alt="">							
+            `<article class="card">
+		        <div class="card-img-top"></div>							
 		        <div class="card-body">
-                    
-                    <h2 class="card-title">${r.name}</h2>
-                    <div class="time"> <i class="far fa-clock"></i>
-                    <p class="font-weight-bold">${r.time} min</p></div>
+                    <div class="header">
+                        <h2 class="card-title">${r.name}</h2>
+                        
+                        <div class="time"> 
+                            <i class="far fa-clock"></i>
+                            <p class="p_time">${r.time} min</p>
+                        </div>
+
+                    </div>
                    
-			        <div class="card-text">${docIng}</div>
-			        <p class="card-text">${r.description}</p>
-			        <div class="card-text">${r.appliance}</div>
-			        <div class="card-text">${docUst}</div>
+                    <div class="main_description">
+                        <div class="card_text card_ingr">${docIng}</div>
+                        <p class="card_text card_descr">${r.description}</p>
+                    </div>  
+                    
+                    
+
                 </div>							
-        	</div>`;
+        	</article>`;
     })
 
+    //<p class="card-text description">${r.description}</p>
+    // <div class="card-text">${r.appliance}</div> 
+    //<div class="card-text">${docUst}</div>
 
     //event onclick ingredient tag
     let all_I = document.querySelectorAll(".tagI");
     for (let i = 0; i < all_I.length; i++) {
         all_I[i].onclick = function(event) {
             onClickTagIngredient(event.target.innerHTML);
+            console.dir(event.target);
         }
 
     }
-
+    console.log(MyTags);
     //event onclick applience tag
     let all_A = document.querySelectorAll(".tagA");
     for (let i = 0; i < all_A.length; i++) {
         all_A[i].onclick = function(event) {
             onClickTagAppliance(event.target.innerHTML);
+
         }
 
     }

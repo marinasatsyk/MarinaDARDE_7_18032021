@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+
     <script src="https://kit.fontawesome.com/72487dcdbe.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
@@ -32,7 +32,11 @@
         <main>
             <div class="wrapper container">
                 <div class="row main_search">
-                    <input type="text" class="search main col-12" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette">
+                    <div class="input_wrapper col-12">
+                        <input type="text" class="search main col-11" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette">
+                        <i class="fas fa-search "></i>
+                    </div>
+
                     <div class="tag_active col-12"></div>
                 </div>
 
@@ -41,7 +45,7 @@
                 <div class="search_tagwrap">
                     <div class="dropdown contener_i contener_tags ">
                         <button class="btn btn_i dropdown-toggle" type="button" id="dropdownMenuButton" style="background: #3282F7; color: white;" data-toggle="dropdown" aria-expanded="false">
-                            ingredients
+                            Ingredients
                         </button>
                         <div class="dropdown-menu front_tag list_i list_tag" style="background: #3282F7; color: white;" aria-labelledby="dropdownMenuButton">
                             <input type="text" class="dropdown-item search ingredients" placeholder="ingredients">
@@ -52,7 +56,7 @@
 
                     <div class="dropdown contener_a contener_tags ">
                         <button class="btn btn_a dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                            appareil
+                            Appareil
                         </button>
                         <div class="dropdown-menu front_tag list_a list_tag" aria-labelledby="dropdownMenuButton">
                             <input type="text" class="dropdown-item search appareil" placeholder="appareil">
@@ -63,7 +67,7 @@
 
                     <div class="dropdown contener_u contener_tags ">
                         <button class="btn btn_u dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                            ustensiles
+                            Ustensiles
                         </button>
                         <div class="dropdown-menu front_tag list_u list_tag" aria-labelledby="dropdownMenuButton">
                             <input type="text" class="dropdown-item search ustensiles" placeholder="ustensiles">

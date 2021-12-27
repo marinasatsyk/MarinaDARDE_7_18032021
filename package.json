@@ -1,0 +1,24 @@
+{
+    "name": "lespetitsplats",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "dependencies": {
+        "bootstrap-icons": "^1.7.2",
+        "sass": "^1.45.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "sass": "sass --watch ./sass/main.scss:./style.css --style compressed"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/marinasatsyk/MarinaDARDE_7_18032021.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/marinasatsyk/MarinaDARDE_7_18032021/issues"
+    },
+    "homepage": "https://github.com/marinasatsyk/MarinaDARDE_7_18032021#readme"
+}
