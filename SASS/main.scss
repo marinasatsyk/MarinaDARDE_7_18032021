@@ -49,6 +49,7 @@ div.wrapper {
     padding: 0;
 }
 
+//part of tags search
 .search_tagwrap {
     display: flex;
 }
@@ -57,45 +58,57 @@ div.wrapper {
     margin-right: 20px;
 }
 
-.btn_i,
-.btn_a,
-.btn_u {
+.btn_all {
     border-radius: 5px;
     width: auto;
     min-width: 170px;
     height: auto;
     min-height: 70px;
     font-size: 18px;
-    font-weight: bold;
-    // margin-bottom: 54px;
-    // margin-right: 20px;
+    // font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    .fa-chevron-down {
+        cursor: pointer;
+    }
 }
 
 .btn_i {
     background: #3282F7;
     color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     p {
         margin: 0;
     }
 }
 
-//
+//for JS toggle
 .show_btn {
     border-bottom-left-radius: 0%;
     border-bottom-right-radius: 0%;
 }
 
 // in dispmay non 
-div.list_i {
-    background: #3282F7;
-    color: white;
+.front_tag {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+    color: white;
 }
 
+div.list_i {
+    background: #3282F7;
+}
+
+div.list_a {
+    background: #68D9A4;
+}
+
+div.list_u {
+    background: #ED6454;
+}
+
+//for JS toggle
 .d_grid {
     display: grid;
     grid-template-rows: repeat(10, auto);
@@ -107,8 +120,7 @@ div.list_i {
     display: none;
 }
 
-input.ingredients {
-    background: #3282F7;
+input.search_tag {
     color: white;
     border: hidden;
     outline: none;
@@ -119,28 +131,35 @@ input.ingredients {
         font-weight: bold;
     }
     &:hover {
-        background: #3282F7;
         color: white;
     }
 }
 
+input.ingredients {
+    background: #3282F7;
+    &:hover {
+        background: #3282F7;
+    }
+}
+
+input.appareil {
+    background: #68D9A4;
+    ;
+    &:hover {
+        background: #68D9A4;
+    }
+}
+
+input.ustensiles {
+    background: #ED6454;
+    &:hover {
+        background: #ED6454;
+    }
+}
+
 //animation===============================
-.wrapper_anim {
-    animation: height 1s forwards;
-}
-
-.wrapper_close {
-    animation: height 1s reverse forwards;
-}
-
 .animation_arrow {
     animation: arrow 1s forwards;
-}
-
-@keyframes height {
-    100% {
-        height: 150px;
-    }
 }
 
 @keyframes arrow {
@@ -149,19 +168,31 @@ input.ingredients {
     }
 }
 
+.wrapper_anim {
+    animation: height 1s forwards;
+}
+
+.wrapper_close {
+    animation: height 1s reverse forwards;
+}
+
+@keyframes height {
+    100% {
+        height: 150px;
+    }
+}
+
 //=========================================
 .btn_a,
 div.list_a {
     background: #68D9A4;
     color: white;
-    //@debug: 5px;
 }
 
 .btn_u,
 div.list_u {
     background: #ED6454;
     color: white;
-    //border-radius: 5px;
 }
 
 .tag_active {
@@ -188,6 +219,7 @@ div.list_u {
     }
 }
 
+//part of recipes
 .wrap_recipes {
     gap: 50px;
     margin-left: 0;

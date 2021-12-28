@@ -289,9 +289,7 @@ function render() {
         	</article>`;
     })
 
-    //<p class="card-text description">${r.description}</p>
-    // <div class="card-text">${r.appliance}</div> 
-    //<div class="card-text">${docUst}</div>
+
 
     //event onclick ingredient tag
     let all_I = document.querySelectorAll(".tagI");
@@ -329,37 +327,45 @@ function render() {
 
 
 // function toggle visibility
-let dropdown_arr = document.querySelector("i.fa-chevron-down");
-let list_ingredients = document.querySelector(".list_i");
-let dropdown_btn = document.querySelector(".btn_i");
 
-function visible() {
-    list_ingredients.classList.toggle("d_grid");
-    list_ingredients.classList.toggle("d_none");
-    dropdown_arr.classList.toggle("animation_arrow");
-    dropdown_btn.classList.toggle("show_btn");
+
+let dropdown_arr = document.querySelectorAll("i.fa-chevron-down");
+let list_tags = document.querySelectorAll(".front_tag");
+let dropdown_btn = document.querySelectorAll(".btn_all");
+
+function visible(atr) {
+
+    list_tags.forEach(elem => {
+
+        if (elem.classList.contains(atr)) {
+            elem.classList.toggle("d_grid");
+            elem.classList.toggle("d_none");
+        }
+    })
+
+    dropdown_arr.forEach(elem => {
+        if (elem.classList.contains(atr)) {
+            elem.classList.toggle("animation_arrow");
+        }
+    })
+
+    dropdown_btn.forEach(elem => {
+        if (elem.classList.contains(atr)) {
+            elem.classList.toggle("show_btn");
+        }
+    })
 }
 
-dropdown_arr.onclick = visible;
 
-console.dir(dropdown_btn);
+dropdown_arr.forEach(elem => {
+    elem.addEventListener('click', (e) => {
 
-
-
-// let c = ['avocat pampleumousse', 'pomme', 'banane']
-// let a = "marina"
-// let b = "mousse"
-
-// for (let i = 0; i < c.length; i++) {
-//   console.log(c[i].indexOf(b));
-
-
-
-// }
-
-// let e = c.filter(word => {
-//   if (word.indexOf(b) != -1) {
-//   return true;
-//   }
-// })
-// console.log(e);
+        if (e.currentTarget.classList.contains("i")) {
+            visible("i");
+        } else if (e.currentTarget.classList.contains("a")) {
+            visible("a");
+        } else if (e.currentTarget.classList.contains("u")) {
+            visible("u");
+        }
+    })
+});
