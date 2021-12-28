@@ -332,8 +332,9 @@ function render() {
 let dropdown_arr = document.querySelectorAll("i.fa-chevron-down");
 let list_tags = document.querySelectorAll(".front_tag");
 let dropdown_btn = document.querySelectorAll(".btn_all");
+let input_menu = document.querySelectorAll(".search_tag");
 
-function visible(atr) {
+function visible(atr, cont, plH) {
 
     list_tags.forEach(elem => {
 
@@ -350,9 +351,25 @@ function visible(atr) {
     })
 
     dropdown_btn.forEach(elem => {
+            if (elem.classList.contains(atr)) {
+                elem.classList.toggle("show_btn");
+            }
+        })
+        //for show all ing, app, ust & change viewport 
+    input_menu.forEach(elem => {
+
         if (elem.classList.contains(atr)) {
-            elem.classList.toggle("show_btn");
+
+            elem.classList.toggle("input_active_tag");
+
+            if (elem.classList.contains("input_active_tag")) {
+                elem.placeholder = `Rechercher ${cont}`;
+            } else if (!elem.classList.contains("input_active_tag")) {
+                elem.placeholder = plH;
+            }
         }
+
+
     })
 }
 
@@ -361,11 +378,11 @@ dropdown_arr.forEach(elem => {
     elem.addEventListener('click', (e) => {
 
         if (e.currentTarget.classList.contains("i")) {
-            visible("i");
+            visible("i", "un ingredient", "Ingredients");
         } else if (e.currentTarget.classList.contains("a")) {
-            visible("a");
+            visible("a", "un appareil", "Appareil");
         } else if (e.currentTarget.classList.contains("u")) {
-            visible("u");
+            visible("u", "une ustensile", "Ustensiles");
         }
     })
 });

@@ -126,12 +126,25 @@ input.search_tag {
     outline: none;
     &::placeholder {
         color: #E7E7E7;
-        font-size: 18px;
         font-family: 'Lato';
-        font-weight: bold;
     }
     &:hover {
         color: white;
+    }
+}
+
+.input_nonactive {
+    &::placeholder {
+        font-size: 18px;
+        // font-weight: bold;
+    }
+}
+
+.input_active_tag {
+    &::placeholder {
+        // font-size: 13px;
+        font-weight: unset;
+        color: darken(#FFFFFF, 20%);
     }
 }
 
