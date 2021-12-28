@@ -313,6 +313,7 @@ function init(pRecipes) {
         MyRecipes.map(r => {
             let docIng = "";
             let docUst = "";
+            let docDesc = r.description.length > 145 ? r.description.slice(0, 145) + "..." : r.description;
 
             r.ingredients.map(i => {
                 docIng += createIngredientInRecipe(i) + "\n";
@@ -339,7 +340,7 @@ function init(pRecipes) {
                 
                     <div class="main_description">
                         <div class="card_text card_ingr">${docIng}</div>
-                        <p class="card_text card_descr">${r.description}</p>
+                        <p class="card_text card_descr">${docDesc}</p>
                     </div>  
                     
                     
