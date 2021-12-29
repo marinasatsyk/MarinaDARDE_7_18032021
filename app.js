@@ -201,9 +201,10 @@ function init(pRecipes) {
                 })
             }
 
-            // console.log(list_ing.toString());
-            // console.log(list_appl.toString());
-            // console.log(list_ust.toString());
+
+        } else if (keyword.length == 0) {
+            //TODO search ingredient/ustensile/appliance search bar
+
         }
 
 
@@ -226,14 +227,7 @@ function init(pRecipes) {
 
         render();
 
-        // let result1 = result0;
-        // for (let ustensil of all_ustensils) {
 
-        //	 result1 = result1.filter(r =>
-        //		 r.ustensils.filter(u => u.toLowerCase().includes(ustensil)).length > 0
-        //	 )
-        // }
-        // console.log(result1);
 
     }
 
@@ -286,11 +280,11 @@ function init(pRecipes) {
             tagClose.onclick = function() {
                 console.log("click " + tag.name);
                 MyTags.splice(MyTags.indexOf(tag), 1);
-                console.log(MyTags);
+                // console.log(MyTags);
                 search();
             }
 
-            // tagAct.style.background =
+
 
         });
 
@@ -313,39 +307,68 @@ function init(pRecipes) {
         MyRecipes.map(r => {
             let docIng = "";
             let docUst = "";
+            let docDesc = r.description.length > 145 ? r.description.slice(0, 145) + "..." : r.description;
 
             r.ingredients.map(i => {
                 docIng += createIngredientInRecipe(i) + "\n";
                 //  TemplateView.createElement("p", "p_ing", docIng).innerHTML = i.ingredient;
             })
             r.ustensils.map(u => {
-                docUst += `<p class="list_u">${u}</p>`
-            })
-            console.log(docIng);
+                    let ust = TemplateView.createElement("p", "list_u");
+                    ust.textContent = u;
+                    docUst += ust;
+                    // docUst += `<p class="list_u">${u}</p>`
+                })
+                // console.log(docIng);
 
-            recipesDoc.innerHTML +=
-                `<article class="card">
-                <div class="card-img-top"></div>							
-                <div class="card-body">
-                    <div class="header">
-                        <h2 class="card-title">${r.name}</h2>
-                        
-                        <div class="time"> 
-                            <i class="far fa-clock"></i>
-                            <p class="p_time">${r.time} min</p>
-                        </div>
 
-                    </div>
-                
-                    <div class="main_description">
-                        <div class="card_text card_ingr">${docIng}</div>
-                        <p class="card_text card_descr">${r.description}</p>
-                    </div>  
-                    
-                    
 
-                </div>							
-            </article>`;
+            let article = TemplateView.createElement("arcticle", "card", recipesDoc);
+            let img_art_place = TemplateView.createElement("div", "card-img-top", article);
+
+            let card_body = TemplateView.createElement("div", "card-body", article);
+            let card_head = TemplateView.createElement("div", "header", card_body);
+            let h2_card = TemplateView.createElement("h2", "card-title", card_head);
+            h2_card.textContent = r.name;
+
+            let time_cont = TemplateView.createElement("div", "time", card_head);
+            let icon_time = TemplateView.createElement("i", "far fa-clock", time_cont);
+            let p_time = TemplateView.createElement("p", "p_time", time_cont);
+            p_time.textContent = r.time + "min";
+
+            let main_description = TemplateView.createElement("div", "main_description", card_body);
+            let card_ingr = TemplateView.createElement("div", "card_text card_ingr", main_description);
+            card_ingr.innerHTML = docIng;
+
+            let card_descr = TemplateView.createElement("p", "card_text card_descr", main_description);
+            card_descr.textContent = docDesc;
+
+
+            // recipesDoc.innerHTML +=
+            //     `<article class="card">
+            //     <div class="card-img-top"></div>							
+            //     <div class="card-body">
+            //         <div class="header">
+            //             <h2 class="card-title">${r.name}</h2>
+
+            //             <div class="time"> 
+            //                 <i class="far fa-clock"></i>
+            //                 <p class="p_time">${r.time} min</p>
+            //             </div>
+
+            //         </div>
+
+            //         <div class="main_description">
+            //             <div class="card_text card_ingr">${docIng}</div>
+            //             <p class="card_text card_descr">${docDesc}</p>
+            //         </div>  
+
+
+
+            //     </div>							
+            // </article>`;
+
+
         })
 
 
@@ -378,10 +401,6 @@ function init(pRecipes) {
 
         }
 
-
-
-        console.log(MyRecipes);
-        console.log(MyTags);
     }
 
 

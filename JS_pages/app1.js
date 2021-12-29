@@ -3,7 +3,7 @@ export class Database {
         if (typeof pDataOrFile === "string") {
             this.loadJson(pDataOrFile, localStorageName);
         } else {
-            console.log(typeof pDataOrFile);
+            // console.log(typeof pDataOrFile);
             this._lsName = localStorageName;
             this._data = this.getLocalStorage();
             if (!this._data) this.data = pDataOrFile;
