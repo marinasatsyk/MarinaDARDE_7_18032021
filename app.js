@@ -1,6 +1,6 @@
-import { Database } from "./JS_pages/app1.js";
+import { Database } from "./JS_pages/dataLoading.js";
 import { recipes } from "./data.js";
-import { TemplateView } from "./JS_pages/Templates/TemplateView.js"
+import { TemplateView } from "./JS_pages/Templates/TemplateView.js";
 
 
 
