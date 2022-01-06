@@ -57,7 +57,7 @@ input.search_tag {
 
 .input_active_tag {
     &::placeholder {
-        // font-size: 13px;
+        font-size: 13px;
         font-weight: unset;
         color: darken(#FFFFFF, 20%);
     }
