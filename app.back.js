@@ -497,7 +497,7 @@ dropdown_arr.forEach(elem => {
         }
     })
 });
-}
+
 
 
 init(recipes);
