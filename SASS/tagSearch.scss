@@ -1,6 +1,11 @@
 //part of tags search
 .search_tagwrap {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    @media #{$mobile-only} {
+        justify-content: center;
+    }
 }
 
 .contener_tags {

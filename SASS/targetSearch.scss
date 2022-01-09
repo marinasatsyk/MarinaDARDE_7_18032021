@@ -63,6 +63,10 @@ input.search_tag {
     }
 }
 
+.front_tag {
+    padding: 5px;
+}
+
 input.ingredients {
     background: #3282F7;
     &:hover {
@@ -128,6 +132,8 @@ div.list_u {
     margin-bottom: 15px;
     padding-left: 0;
     padding-right: 0;
+    flex-wrap: wrap;
+    row-gap: 15px;
     .show_tag {
         margin-right: 20px;
         border-radius: 5px;
@@ -145,4 +151,16 @@ div.list_u {
         cursor: pointer;
         margin-left: 13px;
     }
+}
+
+.tag_ing {
+    background-color: #3282F7;
+}
+
+.tag_ust {
+    background-color: #ED6454;
+}
+
+.tag_apl {
+    background-color: #68D9A4;
 }
