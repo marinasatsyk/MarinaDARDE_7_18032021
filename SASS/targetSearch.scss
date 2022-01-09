@@ -1,0 +1,166 @@
+//for JS toggle
+.show_btn {
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+// in display non 
+.front_tag {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+}
+
+div.list_i {
+    background: #3282F7;
+}
+
+div.list_a {
+    background: #68D9A4;
+}
+
+div.list_u {
+    background: #ED6454;
+}
+
+//for JS toggle
+.d_grid {
+    display: grid;
+    grid-template-rows: repeat(10, auto);
+    grid-gap: 20px;
+    grid-auto-flow: column;
+}
+
+.d_none {
+    display: none;
+}
+
+input.search_tag {
+    color: white;
+    border: hidden;
+    outline: none;
+    &::placeholder {
+        color: #E7E7E7;
+        font-family: 'Lato';
+    }
+    &:hover {
+        color: white;
+    }
+}
+
+.input_nonactive {
+    &::placeholder {
+        font-size: 18px;
+        // font-weight: bold;
+    }
+}
+
+.input_active_tag {
+    &::placeholder {
+        font-size: 13px;
+        font-weight: unset;
+        color: darken(#FFFFFF, 20%);
+    }
+}
+
+.front_tag {
+    padding: 5px;
+}
+
+input.ingredients {
+    background: #3282F7;
+    &:hover {
+        background: #3282F7;
+    }
+}
+
+input.appareil {
+    background: #68D9A4;
+    ;
+    &:hover {
+        background: #68D9A4;
+    }
+}
+
+input.ustensiles {
+    background: #ED6454;
+    &:hover {
+        background: #ED6454;
+    }
+}
+
+//animation===============================
+.animation_arrow {
+    animation: arrow 1s forwards;
+}
+
+@keyframes arrow {
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+.wrapper_anim {
+    animation: height 1s forwards;
+}
+
+.wrapper_close {
+    animation: height 1s reverse forwards;
+}
+
+@keyframes height {
+    100% {
+        height: 150px;
+    }
+}
+
+//=========================================
+.btn_a,
+div.list_a {
+    background: #68D9A4;
+    color: white;
+}
+
+.btn_u,
+div.list_u {
+    background: #ED6454;
+    color: white;
+}
+
+.tag_active {
+    display: flex;
+    margin-bottom: 15px;
+    padding-left: 0;
+    padding-right: 0;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    .show_tag {
+        margin-right: 20px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .show_tag p {
+        margin-bottom: 0;
+    }
+    .fa-times-circle {
+        font-size: 20px;
+        cursor: pointer;
+        margin-left: 13px;
+    }
+}
+
+.tag_ing {
+    background-color: #3282F7;
+}
+
+.tag_ust {
+    background-color: #ED6454;
+}
+
+.tag_apl {
+    background-color: #68D9A4;
+}

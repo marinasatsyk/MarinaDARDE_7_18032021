@@ -1,0 +1,67 @@
+//part of recipes
+.wrap_recipes {
+    gap: 50px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.card {
+    width: 380px;
+    height: 364px;
+    .card-img-top {
+        width: 100%;
+        height: 178px;
+        background: #C7BEBE;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        h2 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 0;
+            text-align: left;
+            max-width: 75%;
+        }
+    }
+    .time {
+        display: flex;
+        align-items: center;
+        .fa-clock {
+            font-size: 20px;
+        }
+        p.p_time {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+    }
+    .card-body {
+        background: #E7E7E7;
+        // overflow: hidden;
+        //  text-overflow: ellipsis;
+    }
+    .main_description {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        font-size: 12px;
+        height: 85px;
+        overflow: hidden;
+        // text-overflow: ellipsis;
+        .card_text {
+            text-overflow: ellipsis;
+        }
+        .list_p {
+            margin-bottom: 0;
+            text-overflow: ellipsis;
+        }
+        .card_descr {
+            // text-overflow: ellipsis;
+            margin-bottom: 0;
+        }
+        .ingredient_name {
+            font-weight: 700;
+        }
+    }
+}
