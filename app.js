@@ -52,7 +52,7 @@ class Application {
     initDOM() {
 
         // function toggle visibility
-        // tumultueux
+
         const dropdown_arr = document.querySelectorAll("i.fa-chevron-down");
         const list_tags = document.querySelectorAll(".front_tag");
         const dropdown_btn = document.querySelectorAll(".btn_all");
@@ -150,44 +150,44 @@ class Application {
             this.result0 = f.filter(this.result0, keyword);
         }
 
-        // for show ingredients matched after main search
-        for (let g of this.tagGenerators) {
-            g.generate(this.result0);
+        // MAP  transform in .....
+        this.tagGenerators[0].filtered = kwIngredient.length > 2;
+        this.tagGenerators[1].filtered = kwAppliance.length > 2;
+        this.tagGenerators[2].filtered = kwUstensils.length > 2;
+
+        //if (keyword.length < 3) {
+
+        if (kwIngredient.length > 2) {
+            let kwIngredientLC = kwIngredient.toLowerCase();
+            this.tagGenerators[0]._array = [];
+            this.result0.map(r => {
+                r.ingredients.map(ingredient => {
+                    let ingredientLc = ingredient.ingredient.toLowerCase();
+                    if (ingredientLc.includes(kwIngredientLC)) this.tagGenerators[0].pushUnique(ingredientLc);
+                });
+            });
         }
 
-        if (keyword.length < 3) {
-
-            if (kwIngredient.length > 2) {
-                let kwIngredientLC = kwIngredient.toLowerCase();
-                this.tagGenerators[0]._array = [];
-                this.result0.map(r => {
-                    r.ingredients.map(ingredient => {
-                        let ingredientLc = ingredient.ingredient.toLowerCase();
-                        if (ingredientLc.includes(kwIngredientLC)) this.tagGenerators[0].pushUnique(ingredientLc);
-                    });
-                });
-            }
-
-            if (kwAppliance.length > 2) {
-                let kwApplianceLC = kwAppliance.toLowerCase();
-                this.tagGenerators[1]._array = [];
-                this.result0.map(r => {
-                    let appLC = r.appliance.toLowerCase();
-                    if (appLC.includes(kwApplianceLC)) this.tagGenerators[1].pushUnique(appLC);
-                });
-            }
-
-            if (kwUstensils.length > 2) {
-                let kwUstensilsLC = kwUstensils.toLowerCase();
-                this.tagGenerators[2]._array = [];
-                this.result0.map(r => {
-                    r.ustensils.map(ust => {
-                        let ustLC = ust.toLowerCase();
-                        if (ustLC.includes(kwUstensilsLC)) this.tagGenerators[2].pushUnique(ustLC);
-                    })
-                });
-            }
+        if (kwAppliance.length > 2) {
+            let kwApplianceLC = kwAppliance.toLowerCase();
+            this.tagGenerators[1]._array = [];
+            this.result0.map(r => {
+                let appLC = r.appliance.toLowerCase();
+                if (appLC.includes(kwApplianceLC)) this.tagGenerators[1].pushUnique(appLC);
+            });
         }
+
+        if (kwUstensils.length > 2) {
+            let kwUstensilsLC = kwUstensils.toLowerCase();
+            this.tagGenerators[2]._array = [];
+            this.result0.map(r => {
+                r.ustensils.map(ust => {
+                    let ustLC = ust.toLowerCase();
+                    if (ustLC.includes(kwUstensilsLC)) this.tagGenerators[2].pushUnique(ustLC);
+                })
+            });
+        }
+        //}
 
         console.log(this.result0);
         this.MyRecipes = this.result0;
@@ -196,6 +196,12 @@ class Application {
     }
 
     render() {
+
+        // for show ingredients matched after main search
+        for (let g of this.tagGenerators) {
+            if (!g.filtered)
+                g.generate(this.result0);
+        }
 
         document.querySelector(".tag_active").innerHTML = "";
 
