@@ -12,6 +12,7 @@ class ListManager {
     pushUnique(item) {
         if (!this._array.includes(item)) this._array.push(item);
     }
+
 }
 
 class Filter extends ListManager {
@@ -37,17 +38,20 @@ class TagGenerator extends ListManager {
         this._application = application;
     }
 
-    generate(array) {}
+    generate(array) {
+        this._array = [];
+    }
 
     render() {
         let filter = this._filter;
         let app = this._application;
         this._parent.innerHTML = "";
+
         this._array.map(l => {
             let tag = TemplateView.createElement("div", this._class, this._parent);
             tag.textContent = l;
             tag.onclick = function() {
-                console.log("click [" + l + "]");
+                // console.log("click [" + l + "]");
                 filter.pushUnique(l);
                 app.search();
             }
@@ -97,10 +101,10 @@ class FilterTags extends Filter {
             tagp.textContent = tag;
             let tagClose = TemplateView.createElement("i", "closetag far fa-times-circle", tagAct);
             tagClose.onclick = function() {
-                console.log("click " + tag);
-                console.log(filter._array);
+                // console.log("click " + tag);
+                // console.log(filter._array);
                 filter._array.splice(filter._array.indexOf(tag), 1);
-                console.log(filter._array);
+                // console.log(filter._array);
                 app.search();
             }
         })
@@ -182,6 +186,7 @@ export class IngredientGenerator extends TagGenerator {
     }
 
     generate(array) {
+        super.generate();
         array.map(r => {
             r.ingredients.map(ingredient =>
                 this.pushUnique(ingredient.ingredient.toLowerCase())
@@ -197,6 +202,7 @@ export class ApplianceGenerator extends TagGenerator {
     }
 
     generate(array) {
+        super.generate();
         array.map(r => this.pushUnique(r.appliance.toLowerCase()))
     }
 }
@@ -208,6 +214,7 @@ export class UstensileGenerator extends TagGenerator {
     }
 
     generate(array) {
+        super.generate();
         array.map(r => r.ustensils.map(ustensil => this.pushUnique(ustensil.toLowerCase())))
     }
 }
