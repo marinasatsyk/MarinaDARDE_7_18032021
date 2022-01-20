@@ -3,6 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     row-gap: 15px;
+    position: relative;
     @media #{$mobile-only} {
         justify-content: center;
     }
@@ -27,6 +28,11 @@
     .fa-chevron-down {
         cursor: pointer;
     }
+}
+
+.w_btn {
+    max-width: 500px;
+    width: 500px;
 }
 
 .btn_i {

@@ -1,11 +1,12 @@
 import { TemplateView } from "./Templates/TemplateView.js";
 
-//abstract class for : 
+//abstract/generate class for all filters: 
 class ListManager {
     constructor() {
         this._array = [];
         this._class = "";
     }
+
 
     get list() { return this._array.slice(); }
 
@@ -13,6 +14,8 @@ class ListManager {
     // pushUnique(item) {
     //     if (!this._array.includes(item)) this._array.push(item);
     // }
+
+    //methode generate  for show a list after sort
     pushUnique(item) {
         for (let i = 0; i < this._array.length; i++)
             if (this._array[i] == item) return false;
@@ -20,14 +23,14 @@ class ListManager {
         return true;
     }
 
-
+    //emulation of indexOf methode
     indexOfChar(val, c) {
-        for (let i = 0; i < val; i++) {
-            if (val[i] == c[0]) return i;
+            for (let i = 0; i < val; i++) {
+                if (val[i] == c[0]) return i;
+            }
+            return -1;
         }
-        return -1;
-    }
-
+        //emulation of the methode string.prototype.includes
     stringIncludes(pStr, pValue) {
         let str = pStr.trim(),
             value = pValue.trim();
@@ -52,6 +55,7 @@ class ListManager {
     }
 }
 
+/*for create element  */
 class Filter extends ListManager {
     constructor(application) {
         super();
@@ -67,6 +71,7 @@ class Filter extends ListManager {
     }
 }
 
+/*create list  based on input main*/
 class TagGenerator extends ListManager {
     constructor(application, parent, filter) {
         super();
@@ -83,7 +88,7 @@ class TagGenerator extends ListManager {
         let filter = this._filter;
         let app = this._application;
         this._parent.innerHTML = "";
-        //replace map 
+
         // this._array.map(l => {
         //     let tag = TemplateView.createElement("div", this._class, this._parent);
         //     tag.textContent = l;
@@ -105,25 +110,20 @@ class TagGenerator extends ListManager {
             }
         }
 
-
-
-
-
     }
 }
 
-
+//for do sort from main search bar 
 export class FilterMain extends Filter {
     constructor(application) {
         super(application);
     }
 
-    //REPLACE FILTER & MAP
 
     filter(array, keyword) {
         if (keyword.length < 1) return array.slice(0);
 
-        // filter from main search bar
+
         let output = [];
         for (let i = 0; i < array.length; i++) {
             let r = array[i];
@@ -144,64 +144,6 @@ export class FilterMain extends Filter {
         }
         return output;
 
-        /*
-        return array.filter(r => {
-            if (r.name.toLowerCase().includes(keyword)) {
-                return true;
-            }
-
-            if (r.description.toLowerCase().includes(keyword)) {
-                return true;
-            }
-
-            r.ingredients.map(ingredient => {
-                let ingredientLc = ingredient.ingredient.toLowerCase();
-                if (ingredientLc.includes(keyword)) {
-                    return true;
-                }
-            });
-        });
-        */
-
-        // let arr_copy = [];
-
-        // for (let i = 0; i < array.length; i++) {
-
-        //     //replace includes
-
-        //     if (array[i].name.toLowerCase() == keyword) {
-        //         // arr_copy.push(array[i]);
-        //         return true;
-        //     } else {
-        //         let name = [];
-        //         n_index.push(i);
-        //     }
-
-        //     if (array[i].description.toLowerCase() == keyword) {
-        //         // arr_copy.push(array[i].description);
-        //         return true;
-        //     } else {
-        //         let d = [];
-        //         d_index.push(i);
-        //     }
-
-
-        //     for (let ingredient = 0; ingredient < array[i][ingredient].length; ingredient++) {
-        //         let ingredientLc = ingrarray[i][ingredient].ingredient.toLowerCase();
-        //         if (ingredientLc.includes(keyword)) {
-        //             arr_copy.push(ingredientLc);
-        //             return true;
-        //         }
-
-        //     }
-
-
-        // }
-        // array = arr_copy;
-        // return array;
-        // // console.log(arr_copy);
-        // // return arr_copy;
-
     }
 
 }
@@ -221,10 +163,10 @@ class FilterTags extends Filter {
             tagp.textContent = tag;
             let tagClose = TemplateView.createElement("i", "closetag far fa-times-circle", tagAct);
             tagClose.onclick = function() {
-                console.log("click " + tag);
-                console.log(filter._array);
+                // console.log("click " + tag);
+                // console.log(filter._array);
                 filter._array.splice(filter._array.indexOf(tag), 1);
-                console.log(filter._array);
+                // console.log(filter._array);
                 app.search();
             }
         })
@@ -266,19 +208,7 @@ export class FilterIngredient extends FilterTags {
         }
 
         return output;
-        /*
-        return array.filter(r => {
-            let resultTags = tagList.filter(tagName => {
-                let name = tagName.toLowerCase();
-                let res = r.ingredients.filter(i => {
-                    let ingredientLc = i.ingredient.toLowerCase();
-                    if (this.stringIncludes(ingredientLc, name)) return true;
-                })
-                return res.length > 0;
-            })
-            return resultTags.length == tagList.length;
-        })
-        */
+
     }
 }
 
@@ -400,7 +330,14 @@ export class ApplianceGenerator extends TagGenerator {
 
     generate(array) {
         super.generate();
-        array.map(r => this.pushUnique(r.appliance.toLowerCase()))
+        // array.map(r => this.pushUnique(r.appliance.toLowerCase()))
+
+        for (let i = 0; i < array.length; i++) {
+            let r = array[i];
+            this.pushUnique(r.appliance.toLowerCase());
+
+        }
+
     }
 }
 
@@ -412,6 +349,19 @@ export class UstensileGenerator extends TagGenerator {
 
     generate(array) {
         super.generate();
-        array.map(r => r.ustensils.map(ustensil => this.pushUnique(ustensil.toLowerCase())))
+        // array.map(r => r.ustensils.map(ustensil => this.pushUnique(ustensil.toLowerCase())))
+
+
+        for (let i = 0; i < array.length; i++) {
+            let ustensils = array[i].ustensils;
+
+            for (let k = 0; k < ustensils.length; k++) {
+                let ustensil = ustensils[k];
+                this.pushUnique(ustensil.toLowerCase())
+
+            }
+
+        }
+
     }
 }
