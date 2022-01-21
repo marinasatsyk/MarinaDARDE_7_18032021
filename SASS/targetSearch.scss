@@ -26,9 +26,16 @@ div.list_u {
 //for JS toggle
 .d_grid {
     display: grid;
-    grid-template-rows: repeat(10, auto);
+    grid-template-columns: repeat(3, auto);
     grid-gap: 20px;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
+    max-width: 500px;
+    width: 500px;
+    z-index: 1;
+    // position: relative;
+    .tag {
+        flex-grow: 1;
+    }
 }
 
 .d_none {
@@ -65,6 +72,7 @@ input.search_tag {
 
 .front_tag {
     padding: 5px;
+    position: absolute;
 }
 
 input.ingredients {
@@ -142,6 +150,7 @@ div.list_u {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        color: white;
     }
     .show_tag p {
         margin-bottom: 0;

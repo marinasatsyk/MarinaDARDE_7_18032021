@@ -1,6 +1,7 @@
 import { TemplateView } from "./Templates/TemplateView.js";
 
-//abstract class for : 
+//abstract/generate class for all filters:
+
 class ListManager {
     constructor() {
         this._array = [];
@@ -66,6 +67,9 @@ export class FilterMain extends Filter {
     }
 
     filter(array, keyword) {
+        //if keword length is smolest than 3  
+        if (keyword.length < 3) return array.slice(0);
+
         //filter from main search bar
         return array.filter(r => {
             if (r.name.toLowerCase().includes(keyword)) {

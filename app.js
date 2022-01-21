@@ -72,60 +72,107 @@ class Application {
             this.applianceBar.oninput =
             this.ustensilsBar.oninput = function() { app.search() };
 
-        function visible(atr, cont, plH) {
+        function visible(index, specs) {
+            let atr = specs[index].id;
+
+            let opened = false;
+            let element = null;
 
             list_tags.forEach(elem => {
                 if (elem.classList.contains(atr)) {
-                    elem.classList.toggle("d_grid");
-                    elem.classList.toggle("d_none");
+                    if (elem.classList.contains("d_none")) {
+                        opened = true;
+                        element = elem;
+                    }
                 }
             })
 
-            dropdown_arr.forEach(elem => {
-                if (elem.classList.contains(atr)) {
-                    elem.classList.toggle("animation_arrow");
+            // close all
+            list_tags.forEach(elem => {
+                if (elem.classList.contains("d_grid")) {
+                    elem.classList.remove("d_grid");
+                    elem.classList.add("d_none");
                 }
             })
 
             dropdown_btn.forEach(elem => {
-                if (elem.classList.contains(atr)) {
-                    elem.classList.toggle("show_btn");
-                }
+                elem.classList.remove("show_btn");
+                elem.classList.remove("w_btn");
             })
+
+            dropdown_arr.forEach(elem => elem.classList.remove("animation_arrow"))
 
             //for show all ing, app, ust & change viewport 
+            let i = 0;
             input_menu.forEach(elem => {
-
-                if (elem.classList.contains(atr)) {
-
-                    elem.classList.toggle("input_active_tag");
-                    elem.classList.toggle("input_nonactive");
-
-
-                    if (elem.classList.contains("input_active_tag")) {
-                        elem.placeholder = `Rechercher ${cont}`;
-                    } else if (!elem.classList.contains("input_active_tag")) {
-                        elem.placeholder = plH;
-                    }
-                }
-
+                elem.classList.remove("input_active_tag");
+                elem.classList.remove("input_nonactive");
+                elem.placeholder = specs[i].name2;
+                i++;
             })
+
+            // open at index
+            if (opened == true) {
+                element.classList.toggle("d_grid");
+                element.classList.toggle("d_none");
+
+                dropdown_arr.forEach(elem => {
+                    if (elem.classList.contains(atr)) {
+                        elem.classList.toggle("animation_arrow");
+                    }
+                })
+
+                dropdown_btn.forEach(elem => {
+                        if (elem.classList.contains(atr)) {
+                            elem.classList.toggle("show_btn");
+                            elem.classList.toggle("w_btn");
+                            // elem.clientWidth = elem.parentElement.lastElementChild.clientWidth + "px";
+                        }
+                    })
+                    //for show all ing, app, ust & change viewport 
+                input_menu.forEach(elem => {
+
+                    if (elem.classList.contains(atr)) {
+                        elem.classList.add("input_active_tag");
+                        elem.classList.add("input_nonactive");
+                        elem.placeholder = `Rechercher ${specs[index].name1}`;
+                    }
+
+                })
+            }
+
         }
 
-
+        const dropDownNames = [{
+                id: "i",
+                name1: "un ingredient",
+                name2: "Ingredients"
+            },
+            {
+                id: "a",
+                name1: "un appareil",
+                name2: "Appareil"
+            },
+            {
+                id: "u",
+                name1: "un ustensile",
+                name2: "Ustensiles"
+            }
+        ]
         dropdown_arr.forEach(elem => {
             elem.addEventListener('click', (e) => {
 
                 if (e.currentTarget.classList.contains("i")) {
-                    visible("i", "un ingredient", "Ingredients");
+                    visible(0, dropDownNames);
                 } else if (e.currentTarget.classList.contains("a")) {
-                    visible("a", "un appareil", "Appareil");
+                    visible(1, dropDownNames);
                 } else if (e.currentTarget.classList.contains("u")) {
-                    visible("u", "un ustensile", "Ustensiles");
+                    visible(2, dropDownNames);
                 }
             })
         });
     }
+
     load(pRecipes) {
         this.Data = new Database(pRecipes, "data");
 
@@ -253,7 +300,13 @@ class Application {
                 })
                 // console.log(docIng);
 
-            let article = TemplateView.createElement("arcticle", "card", recipesDoc);
+            let article_lien = TemplateView.createElement("a", "card_lien", recipesDoc);
+            article_lien.href = `./recipe_page.html?recipe=${r.id}`; // for display recipe page
+            article_lien.id = "article_lien_" + r.id;
+            article_lien.target = "blank";
+
+
+            let article = TemplateView.createElement("div", "card", article_lien);
             let img_art_place = TemplateView.createElement("div", "card-img-top", article);
 
             let card_body = TemplateView.createElement("div", "card-body", article);
