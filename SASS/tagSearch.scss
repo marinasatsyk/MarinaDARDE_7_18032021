@@ -11,6 +11,9 @@
 
 .contener_tags {
     margin-right: 20px;
+    @media #{$mobile-only} {
+        margin-right: 0;
+    }
 }
 
 .btn_all {
@@ -33,6 +36,10 @@
 .w_btn {
     max-width: 500px;
     width: 500px;
+    @media #{$mobile-only} {
+        width: unset;
+        min-width: 244px;
+    }
 }
 
 .btn_i {
