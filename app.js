@@ -282,6 +282,12 @@ class Application {
         let recipesDoc = document.querySelector(".wrap_recipes");
         recipesDoc.innerHTML = "";
 
+        if (this.MyRecipes.length < 1) {
+            recipesDoc.innerHTML = `<h3 class="no_recipes">Aucune recette ne correspond à votre critère… vous pouvez
+            chercher « tarte aux pommes », « poisson », etc.</h3>`;
+            return;
+        }
+
         this.MyRecipes.map(r => {
             let docIng = "";
             let docUst = "";

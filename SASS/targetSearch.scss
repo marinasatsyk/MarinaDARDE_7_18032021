@@ -33,6 +33,11 @@ div.list_u {
     width: 500px;
     z-index: 1;
     // position: relative;
+    @media #{$mobile-only} {
+        grid-template-columns: repeat(2, auto);
+        width: unset;
+        min-width: 244px;
+    }
     .tag {
         flex-grow: 1;
     }
