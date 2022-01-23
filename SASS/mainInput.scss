@@ -29,14 +29,28 @@ div.container {
     border-radius: 5px;
     align-items: center;
     justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
     input.main {
         background-color: #E7E7E7;
         border: none;
         height: 100%;
         outline: none;
+        padding-left: 0;
+        padding-right: 0;
+        @media #{$mobile-only} {
+            &::placeholder {
+                display: flex;
+                font-size: 15px;
+                flex-wrap: wrap;
+            }
+        }
     }
     .fa-search {
         font-size: 32px;
+        // @media #{$mobile-only} {
+        //     font-size: 20px;
+        // }
     }
 }
 

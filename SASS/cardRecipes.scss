@@ -31,12 +31,30 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
+        @media #{$mobile-only} {
+            display: flex;
+            flex-direction: column;
+            h2 {
+                align-self: center;
+            }
+            div {
+                margin-bottom: 10px;
+                p {
+                    margin-left: 10px;
+                }
+            }
+        }
         h2 {
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 0;
+            margin-bottom: 15px;
             text-align: left;
             max-width: 75%;
+        }
+        div {
+            p {
+                margin-left: 10px;
+            }
         }
     }
     .time {
@@ -77,5 +95,38 @@
         .ingredient_name {
             font-weight: 700;
         }
+    }
+}
+
+#wrapper {
+    height: max-content;
+}
+
+.self_page {
+    width: 90%;
+    height: unset;
+    margin: 50px auto;
+    .main_description {
+        overflow: visible;
+        height: unset;
+    }
+    .time,
+    .ust_cont,
+    .recipe_appl {
+        display: flex;
+        align-items: center;
+        i {
+            font-size: 20px;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 0;
+            text-transform: lowercase;
+        }
+    }
+    .ust_wrap {
+        display: flex;
+        flex-direction: column;
     }
 }
