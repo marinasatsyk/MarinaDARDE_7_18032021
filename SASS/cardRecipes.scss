@@ -30,10 +30,7 @@
     .header {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 20px;
         @media #{$mobile-only} {
-            display: flex;
-            flex-direction: column;
             h2 {
                 align-self: center;
             }
@@ -55,6 +52,13 @@
             p {
                 margin-left: 10px;
             }
+        }
+    }
+    .header_single {
+        @media #{$mobile-only} {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
         }
     }
     .time {
