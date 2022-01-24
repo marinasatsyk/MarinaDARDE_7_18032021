@@ -66,6 +66,22 @@ window.onload = function() {
     let p_time = TemplateView.createElement("p", "p_time", time_cont);
     p_time.textContent = r.time + "min";
 
+    let servings = TemplateView.createElement("div", "wrap_servings", card_head);
+    let icon_serving = TemplateView.createElement("i", "fas fa-concierge-bell", servings);
+    let unit_servings = TemplateView.createElement("p", "unit_serv", servings);
+
+    // if (+r.servings == 1) {
+    //     unit_servings.innerHTML = r.servings + " " + "portion";
+    // } else {
+    //     unit_servings.innerHTML = r.servings + " " + "portions";
+    // }
+
+
+
+
+    (+r.servings) == 1 ? unit_servings.innerHTML = r.servings + " " + "portion" : unit_servings.innerHTML = r.servings + " " + "portions";
+
+
     let main_description = TemplateView.createElement("div", "main_description", card_body);
     let card_ingr = TemplateView.createElement("div", "card_text card_ingr", main_description);
     card_ingr.innerHTML = docIng;
