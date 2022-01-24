@@ -30,6 +30,8 @@
     .header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
         @media #{$mobile-only} {
             h2 {
                 align-self: center;
@@ -44,9 +46,9 @@
         h2 {
             font-size: 18px;
             font-weight: bold;
-            margin-bottom: 15px;
             text-align: left;
             max-width: 75%;
+            margin-bottom: 0;
         }
         div {
             p {
