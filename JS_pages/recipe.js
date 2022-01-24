@@ -45,7 +45,7 @@ window.onload = function() {
     let img_art_place = TemplateView.createElement("div", "card-img-top", article);
 
     let card_body = TemplateView.createElement("div", "card-body", article);
-    let card_head = TemplateView.createElement("div", "header", card_body);
+    let card_head = TemplateView.createElement("div", "header header_single", card_body);
     let h2_card = TemplateView.createElement("h2", "card-title", card_head);
     h2_card.textContent = r.name;
 
