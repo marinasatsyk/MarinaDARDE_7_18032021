@@ -80,12 +80,15 @@ export class FilterMain extends Filter {
                 return true;
             }
 
-            r.ingredients.map(ingredient => {
+
+            return r.ingredients.find(ingredient => {
                 let ingredientLc = ingredient.ingredient.toLowerCase();
                 if (ingredientLc.includes(keyword)) {
                     return true;
                 }
             });
+
+
         });
     }
 }
