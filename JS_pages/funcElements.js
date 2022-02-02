@@ -68,7 +68,10 @@ export class FilterMain extends Filter {
 
     filter(array, keyword) {
         //if keword length is smolest than 3  
-        if (keyword.length < 3) return array.slice(0);
+        if (keyword.length < 3) {
+            console.log(array.slice(0));
+            return array.slice(0);
+        }
 
         //filter from main search bar
         return array.filter(r => {
@@ -79,7 +82,6 @@ export class FilterMain extends Filter {
             if (r.description.toLowerCase().includes(keyword)) {
                 return true;
             }
-
 
             return r.ingredients.find(ingredient => {
                 let ingredientLc = ingredient.ingredient.toLowerCase();
@@ -108,7 +110,6 @@ class FilterTags extends Filter {
             tagp.textContent = tag;
             let tagClose = TemplateView.createElement("i", "closetag far fa-times-circle", tagAct);
             tagClose.onclick = function() {
-                // console.log("click " + tag);
                 // console.log(filter._array);
                 filter._array.splice(filter._array.indexOf(tag), 1);
                 // console.log(filter._array);

@@ -52,7 +52,7 @@ class Application {
     initDOM() {
 
         // function toggle visibility
-        // tumultueux
+
         const dropdown_arr = document.querySelectorAll("i.fa-chevron-down");
         const list_tags = document.querySelectorAll(".front_tag");
         const dropdown_btn = document.querySelectorAll(".btn_all");
@@ -194,7 +194,14 @@ class Application {
 
         //filter from tags lists
         for (let f of this.filters) {
+            // j'ai rajouté
             this.result0 = f.filter(this.result0, keyword);
+
+            // if (keyword.length < 3) {
+            //     return this.result0.slice(0);
+
+            // }
+
         }
 
         // for show ingredients matched after main search
@@ -241,6 +248,7 @@ class Application {
         // }
 
         console.log(this.result0);
+
         this.MyRecipes = this.result0;
 
         this.render();
@@ -287,6 +295,7 @@ class Application {
             chercher « tarte aux pommes », « poisson », etc.</h3>`;
             return;
         }
+
 
         this.MyRecipes.map(r => {
             let docIng = "";
