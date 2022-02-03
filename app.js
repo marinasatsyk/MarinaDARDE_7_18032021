@@ -203,9 +203,9 @@ class Application {
         this.filters.map(i => this.result0 = i.filter(this.result0))
 
         // for show ingredients matched after main search
-        // for (let g of this.tagGenerators) {
-        //     g.generate(this.result0);
-        // }
+        for (let g of this.tagGenerators) {
+            g.generate(this.result0);
+        }
 
         this.tagGenerators[0].filtered = kwIngredient.length > 2;
         this.tagGenerators[1].filtered = kwAppliance.length > 2;
