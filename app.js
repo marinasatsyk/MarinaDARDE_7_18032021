@@ -35,7 +35,7 @@ class Application {
         this.ustensileGenerator = new UstensileGenerator(this, document.querySelector(".list_u"), this.ustensileFilter);
         this.applianceGenerator = new ApplianceGenerator(this, document.querySelector(".list_a"), this.applianceFilter);
 
-        this.filters.push(this.filterMain);
+        this.mainSearch = false;
 
         this.filters.push(this.ingredientFilter);
         this.filters.push(this.applianceFilter);
@@ -185,7 +185,9 @@ class Application {
 
     search() {
 
+        this.MyRecipes = [];
         this.result0 = this.array;
+        this.mainSearch = false;
 
         let keyword = this.searchBar.value.toLowerCase();
         let kwIngredient = this.ingredientBar.value.toLowerCase();
@@ -193,18 +195,18 @@ class Application {
         let kwUstensils = this.ustensilsBar.value.toLowerCase();
 
         //main search based in  main search bar in 3 fields for show it on the screen
-
-        //filter from tags lists
-        for (let f of this.filters) {
-            this.result0 = f.filter(this.result0, keyword);
+        if (keyword.length >= 3) {
+            this.mainSearch = true;
+            this.result0 = this.filterMain.filter(this.result0, keyword);
         }
+
+        this.filters.map(i => this.result0 = i.filter(this.result0))
+
 
         // MAP  transform in .....
         this.tagGenerators[0].filtered = kwIngredient.length > 2;
         this.tagGenerators[1].filtered = kwAppliance.length > 2;
         this.tagGenerators[2].filtered = kwUstensils.length > 2;
-
-        //if (keyword.length < 3) {
 
         if (kwIngredient.length > 2) {
             let kwIngredientLC = kwIngredient.toLowerCase();
@@ -238,8 +240,16 @@ class Application {
         }
         //}
 
-        console.log(this.result0);
-        this.MyRecipes = this.result0;
+
+        if (keyword.length >= 3 ||
+            !this.filters[0].empty() ||
+            !this.filters[1].empty() ||
+            !this.filters[2].empty()
+        ) {
+            this.MyRecipes = this.result0;
+        }
+
+        console.log(this.MyRecipes);
 
         this.render();
     }
@@ -249,7 +259,7 @@ class Application {
         // for show ingredients matched after main search
         for (let g of this.tagGenerators) {
             if (!g.filtered)
-                g.generate(this.result0);
+                g.generate(this.MyRecipes);
         }
 
         document.querySelector(".tag_active").innerHTML = "";
@@ -280,10 +290,13 @@ class Application {
         let recipesDoc = document.querySelector(".wrap_recipes");
         recipesDoc.innerHTML = "";
         if (this.MyRecipes.length < 1) {
-            recipesDoc.innerHTML = `<h3 class="no_recipes">Aucune recette ne correspond à votre critère… vous pouvez
-            chercher « tarte aux pommes », « poisson », etc.</h3>`;
+            if (this.mainSearch) {
+                recipesDoc.innerHTML = `<h3 class="no_recipes">Aucune recette ne correspond à votre critère… vous pouvez
+                chercher « tarte aux pommes », « poisson », etc.</h3>`;
+            }
             return;
         }
+
         this.MyRecipes.map(r => {
             let docIng = "";
             let docUst = "";

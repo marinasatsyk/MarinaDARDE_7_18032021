@@ -25,13 +25,17 @@ class ListManager {
 
     //emulation of indexOf methode
     indexOfChar(val, c) {
-            for (let i = 0; i < val; i++) {
-                if (val[i] == c[0]) return i;
-            }
-            return -1;
+        for (let i = 0; i < val; i++) {
+            if (val[i] == c[0]) return i;
+        }
+        return -1;
+    }
+
+    stringIncludes(pStr, pValue) {
+            return pStr.includes(pValue);
         }
         //emulation of the methode string.prototype.includes
-    stringIncludes(pStr, pValue) {
+    stringIncludes_back(pStr, pValue) {
         let str = pStr.trim(),
             value = pValue.trim();
 
@@ -52,6 +56,10 @@ class ListManager {
             }
         }
         return false;
+    }
+
+    empty() {
+        return !this._array || this._array.length < 1;
     }
 }
 
@@ -89,16 +97,6 @@ class TagGenerator extends ListManager {
         let app = this._application;
         this._parent.innerHTML = "";
 
-        // this._array.map(l => {
-        //     let tag = TemplateView.createElement("div", this._class, this._parent);
-        //     tag.textContent = l;
-        //     tag.onclick = function() {
-        //         console.log("click [" + l + "]");
-        //         filter.pushUnique(l);
-        //         app.search();
-        //     }
-        // });
-
         for (let i = 0; i < this._array.length; i++) {
             let l = this._array[i];
             let tag = TemplateView.createElement("div", this._class, this._parent);
@@ -124,24 +122,26 @@ export class FilterMain extends Filter {
         if (keyword.length < 1) return array.slice(0);
 
 
-        let output = [];
+        let output = new Array(array.length),
+            o = 0;
         for (let i = 0; i < array.length; i++) {
             let r = array[i];
-            if (this.stringIncludes(r.name.toLowerCase(), keyword)) {
-                output.push(r);
-            } else if (this.stringIncludes(r.description.toLowerCase(), keyword)) {
-                output.push(r);
+            if (r.name.toLowerCase().includes(keyword)) {
+                output[o++] = r;
+            } else if (r.description.toLowerCase().includes(keyword)) {
+                output[o++] = r;
             } else {
                 for (let k = 0; k < r.ingredients.length; k++) {
                     let ingredient = r.ingredients[k];
                     let ingredientLc = ingredient.ingredient.toLowerCase();
-                    if (this.stringIncludes(ingredientLc, keyword)) {
-                        output.push(r);
+                    if (ingredientLc.includes(keyword)) {
+                        output[o++] = r;
                         break;
                     }
                 }
             }
         }
+        output.length = o;
         return output;
 
     }
@@ -157,19 +157,22 @@ class FilterTags extends Filter {
     render() {
         let app = this._application;
         let filter = this;
-        this._array.map(tag => {
+
+        for (let i = 0; i < this._array.length; i++) {
+            let tag = this._array[i]
+            console.log(this._array);
             let tagAct = TemplateView.createElement("div", this._class, this._parent);
             let tagp = TemplateView.createElement("p", "", tagAct);
-            tagp.textContent = tag;
+            tagp.textContent = this._array[i];
             let tagClose = TemplateView.createElement("i", "closetag far fa-times-circle", tagAct);
+            console.log(this._array[i]);
             tagClose.onclick = function() {
-                // console.log("click " + tag);
-                // console.log(filter._array);
+                console.log("click " + tag);
                 filter._array.splice(filter._array.indexOf(tag), 1);
-                // console.log(filter._array);
                 app.search();
             }
-        })
+        }
+
     }
 }
 
@@ -182,13 +185,11 @@ export class FilterIngredient extends FilterTags {
     filter(array) {
         let tagList = this._array;
         if (tagList.length < 1) return array;
-
-        let output = [];
-
+        let output = new Array(array.length),
+            o = 0;
         for (let i = 0; i < array.length; i++) {
             let r = array[i];
             let result = 0;
-
             for (let t = 0; t < tagList.length; t++) {
                 let tagName = tagList[t];
                 let name = tagName.toLowerCase();
@@ -196,19 +197,17 @@ export class FilterIngredient extends FilterTags {
                 for (let ing = 0; ing < r.ingredients.length; ing++) {
                     let ingredient = r.ingredients[ing].ingredient;
                     let ingredientLc = ingredient.toLowerCase();
-                    if (this.stringIncludes(ingredientLc, name)) {
+                    if (ingredientLc.includes(name)) {
                         found = true;
                         break;
                     }
                 }
                 if (found) result++;
             }
-
-            if (result == tagList.length) output.push(r);
+            if (result == tagList.length) output[o++] = r;
         }
-
+        output.length = o;
         return output;
-
     }
 }
 
@@ -222,30 +221,24 @@ export class FilterAppliance extends FilterTags {
         let tagList = this._array;
         if (tagList.length < 1) return array;
 
-        let output = [];
+        let output = new Array(array.length),
+            o = 0;
         for (let indexRecipe = 0; indexRecipe < array.length; indexRecipe++) {
             let recipe = array[indexRecipe];
             let found = true;
             for (let t = 0; t < tagList.length; t++) {
                 let tagName = tagList[t];
                 let name = tagName.toLowerCase();
-                if (!this.stringIncludes(recipe.appliance.toLowerCase(), name)) {
+                if (!recipe.appliance.toLowerCase().includes(name)) {
                     found = false;
                     break;
                 }
             }
-            if (found) output.push(recipe);
+            if (found) output[o++] = recipe;
         }
+        output.length = o;
         return output;
-        /*
-        return array.filter(r => {
-            let resultTags = tagList.filter(tagName => {
-                let name = tagName.toLowerCase();
-                return r.appliance.toLowerCase().includes(name);
-            })
-            return resultTags.length == tagList.length;
-        })
-        */
+
     }
 }
 export class FilterUstensile extends FilterTags {
@@ -257,7 +250,8 @@ export class FilterUstensile extends FilterTags {
         let tagList = this._array;
         if (tagList.length < 1) return array;
 
-        let output = [];
+        let output = new Array(array.length),
+            o = 0;
         for (let indexRecipe = 0; indexRecipe < array.length; indexRecipe++) {
             let recipe = array[indexRecipe];
 
@@ -268,32 +262,19 @@ export class FilterUstensile extends FilterTags {
 
                 for (let indexUstensil = 0; indexUstensil < recipe.ustensils.length; indexUstensil++) {
                     let ustensil = recipe.ustensils[indexUstensil].toLowerCase();
-                    if (this.stringIncludes(ustensil, name)) {
+                    if (ustensil.includes(name)) {
                         result++;
                         break;
                     }
                 }
             }
 
-            if (result == tagList.length) output.push(recipe);
+            if (result == tagList.length) output[o++] = recipe;
         }
-
+        output.length = o;
         return output;
 
-        /*
-        return array.filter(r => {
 
-            let resultTags = tagList.filter(tagName => {
-                let name = tagName.toLowerCase();
-                let res = r.ustensils.filter(i => {
-                    let ingredientLc = i.toLowerCase();
-                    if (ingredientLc.includes(name)) return true;
-                })
-                return res.length > 0;
-            })
-            return resultTags.length == tagList.length;
-        })
-        */
     }
 }
 
@@ -306,13 +287,7 @@ export class IngredientGenerator extends TagGenerator {
 
     generate(array) {
         super.generate();
-        /*
-        array.map(r => {
-            r.ingredients.map(ingredient =>
-                this.pushUnique(ingredient.ingredient.toLowerCase())
-            )
-        })
-        */
+
         for (let i = 0; i < array.length; i++) {
             let r = array[i].ingredients;
             for (let k = 0; k < r.length; k++) {
@@ -330,7 +305,6 @@ export class ApplianceGenerator extends TagGenerator {
 
     generate(array) {
         super.generate();
-        // array.map(r => this.pushUnique(r.appliance.toLowerCase()))
 
         for (let i = 0; i < array.length; i++) {
             let r = array[i];
@@ -349,8 +323,6 @@ export class UstensileGenerator extends TagGenerator {
 
     generate(array) {
         super.generate();
-        // array.map(r => r.ustensils.map(ustensil => this.pushUnique(ustensil.toLowerCase())))
-
 
         for (let i = 0; i < array.length; i++) {
             let ustensils = array[i].ustensils;
