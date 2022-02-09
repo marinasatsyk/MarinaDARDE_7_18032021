@@ -10,10 +10,6 @@ class ListManager {
 
     get list() { return this._array.slice(); }
 
-    // ==> replace includes, but dont repeat the element
-    // pushUnique(item) {
-    //     if (!this._array.includes(item)) this._array.push(item);
-    // }
 
     //methode generate  for show a list after sort
     pushUnique(item) {
@@ -51,7 +47,6 @@ class ListManager {
                         break;
                     }
                 }
-
                 if (found) return true;
             }
         }
@@ -117,7 +112,6 @@ export class FilterMain extends Filter {
         super(application);
     }
 
-
     filter(array, keyword) {
         if (keyword.length < 1) return array.slice(0);
 
@@ -160,14 +154,14 @@ class FilterTags extends Filter {
 
         for (let i = 0; i < this._array.length; i++) {
             let tag = this._array[i]
-            console.log(this._array);
+                // console.log(this._array);
             let tagAct = TemplateView.createElement("div", this._class, this._parent);
             let tagp = TemplateView.createElement("p", "", tagAct);
             tagp.textContent = this._array[i];
             let tagClose = TemplateView.createElement("i", "closetag far fa-times-circle", tagAct);
-            console.log(this._array[i]);
+            // console.log(this._array[i]);
             tagClose.onclick = function() {
-                console.log("click " + tag);
+                // console.log("click " + tag);
                 filter._array.splice(filter._array.indexOf(tag), 1);
                 app.search();
             }

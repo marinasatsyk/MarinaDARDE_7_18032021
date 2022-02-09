@@ -29,16 +29,8 @@ window.onload = function() {
 
     r.ingredients.map(i => {
         docIng += createIngredientInRecipe(i) + "\n";
-        //  TemplateView.createElement("p", "p_ing", docIng).innerHTML = i.ingredient;
     })
 
-    // r.ustensils.map(u => {
-    //         let ust = TemplateView.createElement("p", "list_u");
-    //         ust.textContent = u;
-    //         docUst += ust;
-    //         // docUst += `<p class="list_u">${u}</p>`
-    //     })
-    //     // console.log(docIng);
 
 
     let article = TemplateView.createElement("div", "card self_page", recipesDoc);

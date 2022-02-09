@@ -129,7 +129,6 @@ class Application {
                         if (elem.classList.contains(atr)) {
                             elem.classList.toggle("show_btn");
                             elem.classList.toggle("w_btn");
-                            // elem.clientWidth = elem.parentElement.lastElementChild.clientWidth + "px";
                         }
                     })
                     //for show all ing, app, ust & change viewport 
@@ -238,7 +237,6 @@ class Application {
                 })
             });
         }
-        //}
 
 
         if (keyword.length >= 3 ||
@@ -304,16 +302,13 @@ class Application {
 
             r.ingredients.map(i => {
                 docIng += createIngredientInRecipe(i) + "\n";
-                //  TemplateView.createElement("p", "p_ing", docIng).innerHTML = i.ingredient;
             })
 
             r.ustensils.map(u => {
-                    let ust = TemplateView.createElement("p", "list_u");
-                    ust.textContent = u;
-                    docUst += ust;
-                    // docUst += `<p class="list_u">${u}</p>`
-                })
-                // console.log(docIng);
+                let ust = TemplateView.createElement("p", "list_u");
+                ust.textContent = u;
+                docUst += ust;
+            })
 
             let article_lien = TemplateView.createElement("a", "card_lien", recipesDoc);
             article_lien.href = `./recipe_page.html?recipe=${r.id}`; // for display recipe page

@@ -88,55 +88,9 @@ function init(pRecipes) {
     let MyUstensils = [];
     let MyTags = [];
 
-    /*
-    //function for tag ingredients
-    function onClickTagIngredient(pTagName) {
-        let objIng = { type: "ingredient", name: pTagName }
-        MyTags.push(objIng);
-        // on click tag
-        MyRecipes = MyRecipes.filter(r => {
-            let res = r.ingredients.filter(i => {
-                let ingredientLc = i.ingredient.toLowerCase();
-                if (ingredientLc.includes(pTagName)) return true;
-            })
-            return res.length > 0;
-        })
-        render();
-    }
-    //function for tag appliance
-    function onClickTagAppliance(pTagName) {
-        let objAppl = { type: "appliance", name: pTagName }
-        MyTags.push(objAppl);
-        // on click tag
-        MyRecipes = MyRecipes.filter(r => {
-            let applianceLc = r.appliance.toLowerCase();
-            if (applianceLc.includes(pTagName)) return true;
-        })
-        render();
-    }
-    //function for tag ustensils
-    function onClickTagUstensils(pTagName) {
-        console.log(pTagName);
-        let objUst = { type: "ustensil", name: pTagName }
-        MyTags.push(objUst);
-        // on click tag
-        MyRecipes = MyRecipes.filter(r => {
-            let res = r.ustensils.filter(i => {
-                let ustensilLc = i.toLowerCase();
-                if (ustensilLc.includes(pTagName)) return true;
-            })
-            return res.length > 0;
-        })
-        render();
-    }
-    */
 
     function search() {
-        /*
-        let list_ing = [];
-        let list_appl = [];
-        let list_ust = [];
-        */
+
         let result0 = array;
         let keyword = searchBar.value.toLowerCase();
         let kwIngredient = ingredientBar.value.toLowerCase();
@@ -155,7 +109,6 @@ function init(pRecipes) {
                 result0 = f.filter(result0);
             }
 
-            // console.log(result0);
 
             // for show ingredients matched after main search
             for (let g of tagGenerators) {
@@ -166,37 +119,6 @@ function init(pRecipes) {
             list_ust = tagGenerators[2].list;
 
 
-            /*
-            if (MyTags.length > 0) {
-                result0 = result0.filter(recipe => {
-                    let found = true;
-                    for (let t of MyTags) {
-                        found = false;
-                        switch (t.type) {
-                            case "ingredient":
-                                for (let ri of recipe.ingredients)
-                                    if (ri.ingredient.toLowerCase() == t.name.toLowerCase()) {
-                                        found = true;
-                                        break;
-                                    }
-                                break;
-                            case "ustensile":
-                                for (ru of recipe.ustensils)
-                                    if (ru.toLowerCase() == t.name.toLowerCase()) { found = true; break; }
-                                break;
-                            case "appliance":
-                                if (recipe.appliance.toLowerCase() == t.name.toLowerCase()) { found = true; break; }
-                                break;
-                            default:
-                                console.error("illegal tag found", t.type);
-                                return false;
-                        }
-                        if (!found) return false;
-                    };
-                    return found;
-                })
-            }
-            */
 
         } else if (keyword.length == 0) {
 
@@ -232,27 +154,7 @@ function init(pRecipes) {
             };
 
         }
-
-
-        console.log(result0);
-        //     //repetition of this func
-
-
     }
-
-    /*
-    //filter a list of ingredients since ing search
-    if (kwIngredient.length > 2) {
-        list_ing = list_ing.filter(i => i.includes(kwIngredient));
-        console.log(list_ing);
-    }
-    if (kwAppliance.length > 2) {
-        list_appl = list_appl.filter(i => i.includes(kwAppliance));
-    }
-    if (kwUstensils.length > 2) {
-        list_ust = list_ust.filter(i => i.includes(kwUstensils));
-    }
-    */
 
     MyRecipes = result0;
     MyIngredients = list_ing;
@@ -260,8 +162,6 @@ function init(pRecipes) {
     MyUstensils = list_ust;
 
     render();
-
-
 }
 
 function render() {
