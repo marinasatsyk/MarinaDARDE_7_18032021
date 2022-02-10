@@ -153,7 +153,7 @@ class Application {
             {
                 id: "a",
                 name1: "un appareil",
-                name2: "Appareil"
+                name2: "Appareils"
             },
             {
                 id: "u",
@@ -199,7 +199,7 @@ class Application {
             this.result0 = this.filterMain.filter(this.result0, keyword);
         }
 
-        this.filters.map(i => this.result0 = i.filter(this.result0))
+        this.filters.map(filter => this.result0 = filter.filter(this.result0))
 
 
         // MAP  transform in .....

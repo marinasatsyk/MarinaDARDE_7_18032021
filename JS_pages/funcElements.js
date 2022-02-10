@@ -154,14 +154,11 @@ class FilterTags extends Filter {
 
         for (let i = 0; i < this._array.length; i++) {
             let tag = this._array[i]
-                // console.log(this._array);
             let tagAct = TemplateView.createElement("div", this._class, this._parent);
             let tagp = TemplateView.createElement("p", "", tagAct);
             tagp.textContent = this._array[i];
             let tagClose = TemplateView.createElement("i", "closetag far fa-times-circle", tagAct);
-            // console.log(this._array[i]);
             tagClose.onclick = function() {
-                // console.log("click " + tag);
                 filter._array.splice(filter._array.indexOf(tag), 1);
                 app.search();
             }
