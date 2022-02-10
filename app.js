@@ -152,7 +152,7 @@ class Application {
             {
                 id: "a",
                 name1: "un appareil",
-                name2: "Appareil"
+                name2: "Appareils"
             },
             {
                 id: "u",

@@ -518,7 +518,7 @@ dropdown_arr.forEach(elem => {
         if (e.currentTarget.classList.contains("i")) {
             visible("i", "un ingredient", "Ingredients");
         } else if (e.currentTarget.classList.contains("a")) {
-            visible("a", "un appareil", "Appareil");
+            visible("a", "un appareil", "Appareils");
         } else if (e.currentTarget.classList.contains("u")) {
             visible("u", "un ustensile", "Ustensiles");
         }
