@@ -179,12 +179,13 @@ class Application {
 
         // search from local storage
         this.array = this.Data.data;
+        this.search();
 
     }
 
     search() {
 
-        this.MyRecipes = [];
+        this.MyRecipes = this.array;
         this.result0 = this.array;
         this.mainSearch = false;
 
